@@ -1,3 +1,81 @@
+import React, { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import abi from './abi.json';
+import './App.css';
+
+function App() {
+  const [contract, setContract] = useState();
+  const [todoCount, setTodoCount] = useState(0);
+  const [inputItem, setInputItem] = useState();
+  const [inputListItem, setInputListItem] = useState();
+  const [inputListItemRes, setInputListItemRes] = useState();
+
+
+  const contractExecution = async () => {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const Contract = new ethers.Contract("0x95CE58B67D652D2389b564d42Bb13932d5977d2F", abi, signer)
+    setContract(Contract)
+  }
+
+  const getTodoCount = async () => {
+    if (contract) {
+      const res = await contract.count();
+      setTodoCount(Number(res))
+    }
+  }
+
+  useEffect(() => {
+    contractExecution();
+  }, [])
+
+  const handleChange = (e) => {
+    setInputItem(e.target.value)
+  }
+
+  const handleSubmit = async () => {
+    const res = await contract.getTodo(inputItem);
+  }
+
+  const handleGetTodoList = async () => {
+    const res = await contract.todoList(inputListItem - 1);
+    setInputListItemRes(res);
+  }
+
+  const handleTodoList = (e) => {
+    setInputListItem(e.target.value);
+  }
+
+  return (
+
+    <div className='app-container'>
+      <button onClick={getTodoCount}>Get the Count</button>
+      <h1>count of todo :- {todoCount}</h1>
+
+      <div className='input-container'>
+        Enter The Input value
+        <input onChange={handleChange}></input>
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
+
+      <div className='input-container'>
+        <input onChange={handleTodoList}></input>
+        <button onClick={handleGetTodoList}>Get todoList</button>
+        <h3>{inputListItemRes}</h3>
+      </div>
+
+    </div>
+  )
+}
+
+export default App
+
+
+
+
+
+
+/*
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
@@ -38,3 +116,4 @@ function App() {
 }
 
 export default App;
+*/

@@ -1,4 +1,4 @@
-
+/*
 .App {
   text-align: center;
 }
@@ -49,4 +49,66 @@ button{
   margin:20px;
   border-radius:  20px;
   width: 100px;
+}*/
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
 }
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #2180c9;
+}
+
+input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+h3 {
+  margin-top: 10px;
+}
+
+
